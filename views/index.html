@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+<!-- head -->
+{% block head %}<title>Data Pegawai</title>{% endblock %}
+<!-- body -->
+{% block body %}
+<div class="container">
+  <h2>Data Pegawai</h2>
+  <table>
+    <thead>
+      {% for key in meta %}
+      <th>{{ key.upper() }}</th>
+      {% endfor %}
+      <th></th>
+    </thead>
+    <tbody>
+      {% for emp in employees %}
+      <tr>
+        {% for key in meta %}
+        <td>{{ emp[key] }}</td>
+        {% endfor %}
+        <td>
+          <span style="display: flex; justify-content: space-around">
+            <a
+              href="/employee/{{ emp['id'] }}/delete"
+              class="bi bi-trash3"
+              style="cursor: pointer; text-decoration: none"
+            ></a>
+            <a
+              href="/employee/{{ emp['id'] }}"
+              class="bi bi-pencil-fill"
+              style="cursor: pointer"
+            ></a>
+          </span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button onclick="window.location.assign('/tambahdata')">Tambah</button>
+</div>
+{% endblock %}

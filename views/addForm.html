@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+<!-- head -->
+{% block head %}
+<title>
+    {% if employee is none %}
+    Tambah Data Pegawai
+    {% else %}
+    Edit Data Pegawai
+    {% endif %}
+</title>
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<div class="container">
+  <h2>Tambah Data Pegawai</h2>
+  {% if employee is none %}
+  <form action="/tambahdata" method="POST">
+    {% else %}
+    <form action="/employee/update" method="POST" >
+    <input type="hidden" name="id" value="{{ employee['id']}}">
+    {% endif %}
+    <label for="first_name">First Name</label>
+    <input type="text" name="first_name" id="first_name" placeholder="{{ employee['first_name'] }}"/>
+    <label for="last_name">Last Name</label>
+    <input type="text" name="last_name" id="last_name" placeholder="{{ employee['last_name'] }}"/>
+    <label for="address">Alamat</label>
+    <input type="text" name="address" id="address" placeholder="{{ employee['address'] }}"/>
+    <label for="salary">Phone</label>
+    <input type="number" name="phone" id="salary" placeholder="{{ employee['phone'] }}" />
+    <div class="check-group">
+      <input type="radio" name="is_staff" id="is_staff" value="false" />
+      <label for="is_staff">Non Staff</label>
+      <input type="radio" name="is_staff" id="is_staff" value="true" />
+      <label for="is_staff">Staff</label>
+    </div>
+    <button type="submit">
+        {% if employee is none %}
+        Tambah
+        {% else %}
+        Edit
+        {% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}
